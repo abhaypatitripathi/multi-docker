@@ -3,22 +3,22 @@ services:
   - docker
 
 before_install:
-  - docker build -t abhay/react-test -f ./client/Dockerfile.dev ./client
+  - docker build -t abhaypatitripathi/react-test -f ./client/Dockerfile.dev ./client
 
 script:
-  - docker run -e CI=true abhay/react-test npm test
+  - docker run -e CI=true abhaypatitripathi/react-test npm test
 
 after_success:
-  - docker build -t abhay/multi-client ./client
-  - docker build -t abhay/multi-nginx ./nginx
-  - docker build -t abhay/multi-server ./server
-  - docker build -t abhay/multi-worker ./worker
+  - docker build -t abhaypatitripathi/multi-client ./client
+  - docker build -t abhaypatitripathi/multi-nginx ./nginx
+  - docker build -t abhaypatitripathi/multi-server ./server
+  - docker build -t abhaypatitripathi/multi-worker ./worker
   # Log in to docker CLI
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
 
   #Take these images and push to dockerhub
-  - docker push abhay/multi-client
-  - docker push abhay/multi-nginx
-  - docker push abhay/multi-server
-  - docker push abhay/multi-worker
+  - docker push abhaypatitripathi/multi-client
+  - docker push abhaypatitripathi/multi-nginx
+  - docker push abhaypatitripathi/multi-server
+  - docker push abhaypatitripathi/multi-worker
 
