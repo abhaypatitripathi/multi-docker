@@ -1,0 +1,15 @@
+sudo: required
+services:
+  - docker
+
+before_install:
+  - docker build -t abhay/react-test -f ./client/Dockerfile.dev ./client
+
+script:
+  - docker run -e CI=true abhay/react-test npm test
+
+after_success:
+  - docker build -t abhay/multi-client ./client
+  - docker build -t abhay/multi-nginx ./nginx
+  - docker build -t abhay/multi-server ./server
+  - docker build -t abhay/multi-worker ./worker
